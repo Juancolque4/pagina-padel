@@ -1,0 +1,54 @@
+
+CREATE DATABASE DBpadelstore;
+
+USE DBpadelstore;
+
+CREATE TABLE tipocategoria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+INSERT INTO tipoCategoria (id,nombre) VALUES
+(2,'Importadas'),
+(3,'Nacionales');
+
+-- Tabla: paletas
+CREATE TABLE paletas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    marca VARCHAR(50),
+    stock INT,
+    imagen_url VARCHAR(255),
+    precio DECIMAL(10, 2),
+    tipo_categoria_id INT,
+    FOREIGN KEY (tipo_categoria_id) REFERENCES tipoCategoria(id)
+);
+
+-- Tabla: usuarios
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    contraseña VARCHAR(100),
+    registrado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    direccion VARCHAR(255)
+);
+
+-- Tabla: items_carrito
+CREATE TABLE items_carrito (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    producto_id INT,
+    cantidad INT,
+    FOREIGN KEY (producto_id) REFERENCES paletas(id) -- Puede ser paleta o producto de indumentaria
+);
+
+CREATE TABLE ofertas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descuento DECIMAL(5, 2),
+    paleta_id INT,
+    precio DECIMAL(10, 2),
+    imagen_url VARCHAR(255),
+    marca VARCHAR(50),
+    FOREIGN KEY (paleta_id) REFERENCES paletas(id)
+);
