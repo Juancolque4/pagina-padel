@@ -1,0 +1,8 @@
+/* styles.css */
+
+/* Agrega estilos personalizados aquí si es necesario */
+
+/* Clases de animación para las transiciones */
+.opacity-transition {
+    transition: opacity 0.5s ease-in-out;
+  }
